@@ -15,7 +15,7 @@ If you find possible improvements to be done to this challenge please let us kno
 ## The challenge
 
 Pleo runs most of its infrastructure in Kubernetes.
-It's a bunch of microservices talking to each other and performing various tasks like verifying card transactions, moving money around, paying invoices, ...
+It's a bunch of microservices talking to each other and performing various tasks like verifying card transactions, moving money around, paying invoices, etc.
 This challenge is similar but (a lot) smaller :D
 
 In this repo, we provide you with:
@@ -30,7 +30,7 @@ In this repo, we provide you with:
 
 1. Fork this repository
 2. Create a new branch for you to work with.
-3. Install any local K8s cluster (ex: Minikube) on your machine and document your setup, so we can run your solution.
+3. Install any local K8s cluster (ex: Minikube) on your machine and document your setup so we can run your solution.
 
 ### Part 1 - Fix the issue
 
@@ -48,7 +48,7 @@ payment-provider-abcdef1234-1ab25   1/1     Ready                        0      
 
 #### Requirements
 
-Write here about the :bug:, the fix, how you found it, and anything else you want to share about it.
+Write here about the :bug:, the fix, how you found it, and anything else you want to share.
 
 ### Part 2 - Setup the apps
 
@@ -75,9 +75,8 @@ Feel free to express your thoughts and share your experiences with real-world ex
 
 ## What matters to us?
 
-Of course, we expect the solution to run, but we also want to know how you work and what matters to you as an engineer.
-So, feel free to use any technology you want!
-You can create new files, refactor, rename, ...
+We expect the solution to run but we also want to know how you work and what matters to you as an engineer.
+Feel free to use any technology you want! You can create new files, refactor, rename, etc.
 
 Ideally, we'd like to see your progression through commits, verbosity in your answers and all requirements met.
 Don't forget to update the README.md to explain your thought process.
