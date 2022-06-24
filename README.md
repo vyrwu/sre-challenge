@@ -61,7 +61,9 @@ We would like these 2 apps, `invoice-app` and `payment-provider`, to run in a K8
 3. Update existing `deployment.yaml` files to follow k8s best practices. Feel free to remove existing files, recreate them, and/or introduce different technologies. Follow best practices for any other resources you decide to create.
 4. Provide a better way to pass the URL in `invoice-app/main.go` - it's hardcoded at the moment
 5. Complete `deploy.sh` in order to automate all the steps needed to have both apps running in a K8s cluster.
-6. Complete `test.sh` in order to perform tests against your solution and get successful results (all the invoices are paid) via `GET invoices`.
+6. Complete `test.sh` so we can validate your solution can:
+ - successfully pay all the unpaid invoices
+ - return a list of all the paid invoices
 
 ### Part 3 - Questions
 
