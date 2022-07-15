@@ -1,82 +1,68 @@
-## Welcome
+# sre-challenge
 
-We're really happy that you're considering joining us!
-This challenge will help us understand your skills and will also be a starting point for the next interview.
-We're not expecting everything to be done perfectly as we value your time but the more you share with us, the more we get to know about you!
+Code challenge hand-out during the recruitment process of Aleksander Nowak, for the position of a Site Reliability Engineer/DevOps Engineer.
 
-This challenge is split into 3 parts:
+  
+### Understanding requirements
 
-1. Debugging
-2. Implementation
-3. Questions
+#### Setup 
+- [x] 0.1 Fork this repository
+- [x] 0.2 Create a new branch for you to work with.
+- [ ] 0.3 Install any local K8s cluster (ex: Minikube) on your machine and document your setup so we can run your solution.
 
-If you find possible improvements to be done to this challenge please let us know in this readme and/or during the interview.
+*Minikube/k3s will do. Might deploy quick EKS in private AWS acc to setup CI/CD with Github Actions, but then I'll need an ELB. Overkill. If no CI/CD, need a repo setup.sh script to install dependencies (k8s/kubectl/iac)*
 
-## The challenge
+#### Part 1 
+- [ ] 1.1 Find a bug in the setup/code?.
+- [ ] 1.2 Write in README-old.md about the :bug:, the fix, how you found it, and anything else you want to share.
 
-Pleo runs most of its infrastructure in Kubernetes.
-It's a bunch of microservices talking to each other and performing various tasks like verifying card transactions, moving money around, paying invoices, etc.
-This challenge is similar but (a lot) smaller :D
+*Will clarify after deployed. It's weird that the containers are specifically run as non-root. That could be the bug, or a tight security policy (volumes might not mount/AWS credentials also).*
 
-In this repo, we provide you with:
+#### Part 2
+- [ ] 2.1 Deploy both apps to Kubernetes.
+- [ ] 2.2 `invoice-app` must be reachable from outside the cluster.
 
-- `invoice-app/`: An application that gets invoices from a DB, along with its minimal `deployment.yaml`
-- `payment-provider/`: An application that pays invoices, along with its minimal `deployment.yaml`
-- `Makefile`: A file to organize commands.
-- `deploy.sh`: A file to script your solution
-- `test.sh`: A file to perform tests against your solution.
+*Will need ingress.*
 
-### Set up the challenge env
+- [ ] 2.3 `payment-provider` must be only reachable from inside the cluster.
 
-1. Fork this repository
-2. Create a new branch for you to work with.
-3. Install any local K8s cluster (ex: Minikube) on your machine and document your setup so we can run your solution.
+*No ingress = no access from outside. Might seal shut with K8s RBAC.*
 
-### Part 1 - Fix the issue
+- [ ] 2.4 Update existing `deployment.yaml` files to follow k8s best practices. Feel free to remove existing files, recreate them, and/or introduce different technologies. Follow best practices for any other resources you decide to create.
 
-The setup we provide has a :bug:. Find it and fix it! You'll know you have fixed it when the state of the pods in the namespace looks similar to this:
+*No readiness/liveness probes - might need extra endpoints in apps. Need some tagging. Need to operationalise. Kubernetes RBAC to secure the namespaces? Namespaces for test/prod? Container security? Container versions? Persistent volumes? Img pull policy? Resource requests/limits? App config/env vars? Ports?*
 
-```
-NAME                                READY   STATUS                       RESTARTS   AGE
-invoice-app-jklmno6789-44cd1        1/1     Ready                        0          10m
-invoice-app-jklmno6789-67cd5        1/1     Ready                        0          10m
-invoice-app-jklmno6789-12cd3        1/1     Ready                        0          10m
-payment-provider-abcdef1234-23b21   1/1     Ready                        0          10m
-payment-provider-abcdef1234-11b28   1/1     Ready                        0          10m
-payment-provider-abcdef1234-1ab25   1/1     Ready                        0          10m
-```
+- [ ] 2.5 Provide a better way to pass the URL in `invoice-app/main.go` - it's hardcoded at the moment
 
-#### Requirements
+*Pass config via env vars on the deployment.*
 
-Write here about the :bug:, the fix, how you found it, and anything else you want to share.
+- [ ] 2.6 Complete `deploy.sh` in order to automate all the steps needed to have both apps running in a K8s cluster.
 
-### Part 2 - Setup the apps
+*Replace YAMLs with IAC (Pulumi/TF). Consider CI/CD with Github Actions (or ArgoCD)?. Alternatively simple makefiles.*
 
-We would like these 2 apps, `invoice-app` and `payment-provider`, to run in a K8s cluster and this is where you come in!
+- [ ] 2.7 Complete `test.sh` so we can validate your solution can successfully pay all the unpaid invoices and return a list of all the paid invoices.
 
-#### Requirements
+*Probes + Some integration tests should be enough.*
 
-1. `invoice-app` must be reachable from outside the cluster.
-2. `payment-provider` must be only reachable from inside the cluster.
-3. Update existing `deployment.yaml` files to follow k8s best practices. Feel free to remove existing files, recreate them, and/or introduce different technologies. Follow best practices for any other resources you decide to create.
-4. Provide a better way to pass the URL in `invoice-app/main.go` - it's hardcoded at the moment
-5. Complete `deploy.sh` in order to automate all the steps needed to have both apps running in a K8s cluster.
-6. Complete `test.sh` so we can validate your solution can successfully pay all the unpaid invoices and return a list of all the paid invoices.
+#### Part 3
+- [ ] Feel free to express your thoughts and share your experiences with real-world examples you worked with in the past. 
+- [ ] What would you do to improve this setup and make it "production ready"?
 
-### Part 3 - Questions
+Introduce multi-evironment setup. Setup compliance and security guardrails around AWS accounts. Deliver emepheral/shared dev environments for devs. Create CI/CD with sufficient quality gates (lint/unit/intergration/load/chaos/smoke tests). Sign and promote Docker image across pipeline steps. Optional QA testing manual approval. Auto-deploy to prod. Add telemetry - traces/logs/metrics/alerts. Add DynamoDB to invoice-app, and rewrite payment-provider to be async with SQS. Provision AWS resources with IAC (IAM role auth based on pod roles). 
 
-Feel free to express your thoughts and share your experiences with real-world examples you worked with in the past.
+- [ ] There are 2 microservices that are maintained by 2 different teams. Each team should have access only to their service inside the cluster. How would you approach this?
+- [ ] How would you prevent other services running in the cluster to communicate to `payment-provider`?
 
-#### Requirements
+*Kubernetes RBAC, or AWS IAM (depending on the SSO strategy). Ideally, no developer should have access to non-dev clusters (machine-led CI/CD deploys)*
 
-1. What would you do to improve this setup and make it "production ready"?
-2. There are 2 microservices that are maintained by 2 different teams. Each team should have access only to their service inside the cluster. How would you approach this?
-3. How would you prevent other services running in the cluster to communicate to `payment-provider`?
+### TODO
+*The implementation plan and all work chunks will land here.*
 
-## What matters to us?
-
-We expect the solution to run but we also want to know how you work and what matters to you as an engineer.
-Feel free to use any technology you want! You can create new files, refactor, rename, etc.
-
-Ideally, we'd like to see your progression through commits, verbosity in your answers and all requirements met.
-Don't forget to update the README.md to explain your thought process.
+- [ ] Draw solution diagram in drawio
+- [ ] Setup local enviroment 
+- [ ] Setup IAC
+- [ ] Debug services
+- [ ] Implement the solution, adjust the apps
+- [ ] Create setup scripts
+- [ ] Ensure documentation
+- [ ] Write integration tests
