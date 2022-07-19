@@ -58,7 +58,7 @@ Introduce multi-evironment setup. Setup compliance and security guardrails aroun
 ### TODO
 *The implementation plan and all work chunks will land here.*
 
-- [ ] Draw solution diagram in drawio
+- [x] Draw solution diagram in drawio
 - [ ] Setup local enviroment 
 - [ ] Setup IAC
 - [ ] Debug services
