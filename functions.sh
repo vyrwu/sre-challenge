@@ -42,7 +42,7 @@ function vergte() {
 # TODO: lock versions
 function brew_dependencies() {
   info "Checking dependencies:"
-  brew_dependencies=(jq kubectl minikube@1.26.0)
+  brew_dependencies=(jq kubectl minikube@1.26.0 pulumi)
 
   for ((i = 0 ; i < ${#brew_dependencies[@]} ; i++)); do
     IFS=$'@' read -r -a dep_split <<<"${brew_dependencies[i]}"

@@ -1,0 +1,29 @@
+{
+  "name": "invoice-app-iac",
+  "devDependencies": {
+    "@types/node": "^14.18.22",
+    "@typescript-eslint/eslint-plugin": "^5.30.7",
+    "@typescript-eslint/parser": "^5.30.7",
+    "eslint": "^8.20.0",
+    "eslint-config-prettier": "^8.5.0",
+    "eslint-config-standard": "^17.0.0",
+    "eslint-plugin-import": "^2.26.0",
+    "eslint-plugin-node": "^11.1.0",
+    "eslint-plugin-prettier": "^4.2.1",
+    "eslint-plugin-promise": "^6.0.0",
+    "prettier": "^2.7.1"
+  },
+  "dependencies": {
+    "@pulumi/kubernetes": "^3.0.0",
+    "@pulumi/kubernetesx": "^0.1.5",
+    "@pulumi/pulumi": "^3.0.0"
+  },
+  "scripts": {
+    "lint": "eslint --ext .ts --max-warnings 0 .",
+    "lint-fix": "eslint --ext .ts --max-warnings 0 --fix .",
+    "prettier": "prettier --loglevel warn --check .",
+    "prettier-fix": "prettier --loglevel warn --write .",
+    "lint-all": "npm run lint; npm run prettier",
+    "fix-all": "npm run lint --fix; npm run prettier --fix"
+  }
+}

@@ -55,7 +55,7 @@ Introduce multi-evironment setup. Setup compliance and security guardrails aroun
 
 - [x] Draw solution diagram in drawio
 - [x] Setup and document local enviroment
-- [ ] Setup IAC
+- [x] Setup IAC
 - [ ] Debug services
 - [ ] Implement the solution, adjust the apps
 - [ ] Create setup scripts
