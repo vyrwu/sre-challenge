@@ -1,4 +1,4 @@
-name: Build and Push Image to Dockerhub
+name: CI - invoice-app
 on:
   push:
     branches: [feat-ano-code-challenge]
@@ -7,8 +7,7 @@ on:
       - ".github/workflows/build-and-push-invoice-app.yaml"
 
 jobs:
-  push_to_dockerhub:
-    name: Build and Push - invoice-app
+  build_push_image:
     uses: ./.github/workflows/push-to-dockerhub.yaml
     with:
       app_name: invoice-app
