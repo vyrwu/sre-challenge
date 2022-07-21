@@ -23,7 +23,7 @@ const deployment = new k8s.apps.v1.Deployment('payment-provider', {
           },
         ],
         securityContext: {
-          runAsNonRoot: true,
+          runAsUser: 10001,
         },
       },
     },

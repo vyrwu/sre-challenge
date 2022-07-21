@@ -23,7 +23,7 @@ const deployment = new k8s.apps.v1.Deployment('invoice-app', {
           },
         ],
         securityContext: {
-          runAsNonRoot: true,
+          runAsUser: 10001,
         },
       },
     },

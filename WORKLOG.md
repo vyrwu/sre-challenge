@@ -8,13 +8,13 @@
 *Minikube/k3s will do. Might deploy quick EKS in private AWS acc to setup CI/CD with Github Actions, but then I'll need an ELB. Overkill. If no CI/CD, need a repo setup.sh script to install dependencies (k8s/kubectl/iac)*
 
 #### Part 1 
-- [ ] 1.1 Find a bug in the setup/code?.
-- [ ] 1.2 Write in README-old.md about the :bug:, the fix, how you found it, and anything else you want to share.
+- [x] 1.1 Find a bug in the setup/code?.
+- [x] 1.2 Write in README-old.md about the :bug:, the fix, how you found it, and anything else you want to share.
 
 *Will clarify after deployed. It's weird that the containers are specifically run as non-root. That could be the bug, or a tight security policy (volumes might not mount/AWS credentials also).*
 
 #### Part 2
-- [ ] 2.1 Deploy both apps to Kubernetes.
+- [x] 2.1 Deploy both apps to Kubernetes.
 - [ ] 2.2 `invoice-app` must be reachable from outside the cluster.
 
 *Will need ingress.*
@@ -56,7 +56,7 @@ Introduce multi-evironment setup. Setup compliance and security guardrails aroun
 - [x] Draw solution diagram in drawio
 - [x] Setup and document local enviroment
 - [x] Setup IAC
-- [ ] Debug services
+- [x] Debug services
 - [ ] Implement the solution, adjust the apps
 - [ ] Create setup scripts
 - [ ] Ensure documentation
