@@ -1,0 +1,17 @@
+name: Build and Push Image to Dockerhub
+on:
+  push:
+    branches: [feat-ano-code-challenge]
+    paths:
+      - "payment-provider/**"
+      - ".github/workflows/build-and-push-payment-provider.yaml"
+
+jobs:
+  push_to_dockerhub:
+    name: Build and Push - payment-provider
+    uses: ./.github/workflows/push-to-dockerhub.yaml
+    with:
+      app_name: payment-provider
+    secrets:
+      dockerhub_username: ${{ secrets.DOCKERHUB_USERNAME }}
+      dockerhub_access_token: ${{ secrets.DOCKERHUB_ACCESS_TOKEN }}

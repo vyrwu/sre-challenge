@@ -16,7 +16,11 @@ const deployment = new k8s.apps.v1.Deployment('invoice-app', {
       metadata: { labels: appLabels },
       spec: {
         containers: [
-          { name: 'main', image: 'invoice-app:latest', imagePullPolicy: 'IfNotPresent' },
+          {
+            name: 'main',
+            image: 'vyrwu/invoice-app:feat-ano-code-challenge',
+            imagePullPolicy: 'Always',
+          },
         ],
         securityContext: {
           runAsNonRoot: true,
