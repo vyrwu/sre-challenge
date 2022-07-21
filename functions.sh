@@ -72,12 +72,19 @@ function brew_dependencies() {
   done
 }
 
-function minikube_cleanup() {
+function local_workspace_cleanup() {
   info "Clearing minikube..."
   minikube delete --all
+  info "Clearing pulumi stacks..."
+  find . -name '.pulumi' -exec rm -rf '{}' +
 }
 
-function minikube_start() {
+function local_workspace_start() {
   info "Starting minikube..."
   minikube start --cni cilium
+  cd iac-automation
+  npm i
+  npm run start -- up local
+  pulumi logout &>/dev/null
+  success "Done! You are now running Minikube with all the apps deployed."
 }

@@ -5,13 +5,24 @@ Code challenge hand-out during the recruitment process of Aleksander Nowak, for 
 ## Requirements
 
 macOS with `brew`.
-## Instalation
 
-Setup script in the repo will install all required binaries and configure your local Kubernetes cluster (minikube). Note that it may upgrade versions of some the binaries to latest.
+## Local Development
+
+Setup script in the repo will install all required binaries, configure your local development environment running on top of Minikube,
+and Pulumi with a local filesystem backed, and deploy all applications to it. Note that it may upgrade versions of some of the binaries
+to latest.
 
 ```sh
 bash setup.sh
 ```
+
+## Setup - Solution
+- [x] 0.1 Fork this repository
+- [x] 0.2 Create a new branch for you to work with.
+- [x] 0.3 Install any local K8s cluster (ex: Minikube) on your machine and document your setup so we can run your solution.
+
+I provided a simple setup script which installs all neccessary binaries and configures a local environment running in Minikube
+from scratch.
 
 ## Part 1 - Solution
 - [x] 1.1 Find a bug in the setup.

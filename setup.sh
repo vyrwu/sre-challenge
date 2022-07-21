@@ -9,7 +9,5 @@ if ! [[ "${directory_name}" == 'sre-challenge' ]]; then
 fi
 
 brew_dependencies
-
-minikube_cleanup
-
-minikube_start
+local_workspace_cleanup
+local_workspace_start
