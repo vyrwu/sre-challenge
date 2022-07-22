@@ -30,7 +30,7 @@ for (const p of projects) {
   const workDir: string = path.resolve(__dirname, '..', p, 'iac')
   if (environment === 'local') {
     console.info('[INFO] Installing local filesystem Pulumi backend...')
-    shell.exec(`export PULUMI_CONFIG_PASSPHRASE=password && pulumi login file://${workDir}`)
+    shell.exec(`pulumi login file://${workDir}`)
   }
   const username: string = os.userInfo().username
   const lpa: LocalProgramArgs = {

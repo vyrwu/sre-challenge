@@ -84,7 +84,12 @@ function local_workspace_start() {
   minikube start --cni cilium
   cd iac-automation
   npm i
-  npm run start -- up local
+  PULUMI_CONFIG_PASSPHRASE=password npm run start -- up local
+  if [ $? -ne 0 ]; then
+    success "Done! You are now running Minikube with all the apps deployed."
+    success "For local development, use Pulumi under 'iac' repos in the respective projects."
+    success "You must first login to Pulumi, setting the target 'iac' repo as a local backend target."
+    success "Example: cd <iac_repo_path> && pulumi login file://<iac_repo_path> && pulumi up"
+  fi
   pulumi logout &>/dev/null
-  success "Done! You are now running Minikube with all the apps deployed."
 }
