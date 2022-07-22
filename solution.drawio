@@ -1,6 +1,6 @@
 <mxfile host="65bd71144e">
     <diagram id="NW6HLIrqErbMiRj-WH_E" name="Page-1">
-        <mxGraphModel dx="1706" dy="2198" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+        <mxGraphModel dx="792" dy="2069" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
             <root>
                 <mxCell id="0"/>
                 <mxCell id="1" parent="0"/>
@@ -49,7 +49,7 @@
                 <mxCell id="14" value="&lt;i&gt;Deployment&lt;br&gt;invoice-app&lt;br&gt;&lt;/i&gt;" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" parent="28" vertex="1">
                     <mxGeometry width="110" height="80" as="geometry"/>
                 </mxCell>
-                <mxCell id="38" value="&lt;i&gt;Service&lt;br&gt;&lt;/i&gt;&lt;i&gt;payment-provider&lt;/i&gt;&lt;i&gt;&lt;br&gt;&lt;/i&gt;" style="rounded=0;whiteSpace=wrap;html=1;" parent="28" vertex="1">
+                <mxCell id="38" value="&lt;i&gt;Service&lt;br&gt;&lt;/i&gt;&lt;i&gt;payment-provider-dns&lt;/i&gt;&lt;i&gt;&lt;br&gt;&lt;/i&gt;" style="rounded=0;whiteSpace=wrap;html=1;" parent="28" vertex="1">
                     <mxGeometry x="200.5109436089015" y="110.69000000000005" width="134.29905639109853" height="60" as="geometry"/>
                 </mxCell>
                 <mxCell id="15" value="&lt;i&gt;Service&lt;br&gt;&lt;/i&gt;&lt;i&gt;invoice-app&lt;/i&gt;&lt;i&gt;&lt;br&gt;&lt;/i&gt;" style="rounded=0;whiteSpace=wrap;html=1;" parent="28" vertex="1">
@@ -84,6 +84,9 @@
                 </mxCell>
                 <mxCell id="91" style="edgeStyle=none;html=1;exitX=0;exitY=1;exitDx=0;exitDy=0;entryX=1;entryY=0;entryDx=0;entryDy=0;" parent="28" source="80" target="89" edge="1">
                     <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="108" value="&lt;i&gt;Ingress&lt;br&gt;&lt;/i&gt;&lt;i&gt;invoice-app-ingress&lt;br&gt;&lt;/i&gt;" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="28">
+                    <mxGeometry x="200.51094360890147" y="30.690000000000055" width="134.29905639109853" height="60" as="geometry"/>
                 </mxCell>
                 <mxCell id="61" value="" style="rounded=0;whiteSpace=wrap;html=1;" parent="101" vertex="1">
                     <mxGeometry x="600" y="170" width="430" height="552.54" as="geometry"/>
@@ -130,14 +133,11 @@
                 <mxCell id="84" value="&lt;i&gt;Role&lt;br&gt;&lt;/i&gt;&lt;i&gt;payments-admin&lt;/i&gt;&lt;i&gt;&lt;br&gt;&lt;/i&gt;" style="rounded=0;whiteSpace=wrap;html=1;" parent="63" vertex="1">
                     <mxGeometry x="205.3609436089015" y="310.69000000000005" width="134.29905639109853" height="60" as="geometry"/>
                 </mxCell>
-                <mxCell id="102" value="&lt;i&gt;NetworkPolicy&lt;br&gt;&lt;/i&gt;&lt;i&gt;allow-invoices-ingress&lt;/i&gt;&lt;i&gt;&lt;br&gt;&lt;/i&gt;" style="rounded=0;whiteSpace=wrap;html=1;" parent="63" vertex="1">
+                <mxCell id="102" value="&lt;i&gt;NetworkPolicy&lt;br&gt;&lt;/i&gt;&lt;i&gt;allow-invoices-app-ingress&lt;/i&gt;&lt;i&gt;&lt;br&gt;&lt;/i&gt;" style="rounded=0;whiteSpace=wrap;html=1;" parent="63" vertex="1">
                     <mxGeometry x="205.36" y="110.69" width="124.64" height="60" as="geometry"/>
                 </mxCell>
                 <mxCell id="103" value="&lt;i&gt;Group&lt;br&gt;payments-developers&lt;br&gt;&lt;/i&gt;" style="rounded=0;whiteSpace=wrap;html=1;dashed=1;" parent="63" vertex="1">
                     <mxGeometry x="33.36094360890149" y="310.69000000000005" width="134.29905639109853" height="60" as="geometry"/>
-                </mxCell>
-                <mxCell id="107" value="&lt;i&gt;NetworkPolicy&lt;br&gt;&lt;/i&gt;&lt;i&gt;block-all-ingress&lt;/i&gt;&lt;i&gt;&lt;br&gt;&lt;/i&gt;" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="63">
-                    <mxGeometry x="205.36" y="30.69" width="124.64" height="60" as="geometry"/>
                 </mxCell>
                 <mxCell id="41" style="edgeStyle=none;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" parent="101" source="38" target="67" edge="1">
                     <mxGeometry relative="1" as="geometry">
