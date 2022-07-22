@@ -23,4 +23,5 @@ COPY --from=builder /etc/passwd /etc/passwd
 COPY --from=builder /etc/group /etc/group
 COPY --from=builder /go/bin/payment-provider /go/bin/payment-provider
 USER appuser:appuser
+EXPOSE 8082
 ENTRYPOINT ["/go/bin/payment-provider"]

@@ -23,4 +23,5 @@ COPY --from=builder /etc/passwd /etc/passwd
 COPY --from=builder /etc/group /etc/group
 COPY --from=builder /go/bin/invoice-app /go/bin/invoice-app
 USER appuser:appuser
+EXPOSE 8081
 ENTRYPOINT ["/go/bin/invoice-app"]
