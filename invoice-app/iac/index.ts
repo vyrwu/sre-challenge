@@ -122,7 +122,7 @@ const deployment = new k8s.apps.v1.Deployment(
 // This allows 'invoice-app` to discover `payment-provider` in another namespace.
 // It's not enought to make the connection work - `payment-provider` must explicitly
 // allow ingress access from `invoice-app` via NetworkPolicy
-new k8s.core.v1.Service('payment-provider-dns', {
+new k8s.core.v1.Service('payment-provider', {
   metadata: {
     name: 'payment-provider',
     namespace: ns.metadata.name,
@@ -137,6 +137,63 @@ new k8s.core.v1.Service('payment-provider-dns', {
         name: 'http',
         port: 80,
         targetPort: 80,
+      },
+    ],
+  },
+})
+
+const service: k8s.core.v1.Service = new k8s.core.v1.Service(
+  'invoice-app',
+  {
+    metadata: {
+      name: 'invoice-app',
+      labels: appLabels,
+      annotations: commonAnnotations,
+      namespace: ns.metadata.name,
+    },
+    spec: {
+      type: 'ClusterIP',
+      selector: appLabels,
+      ports: [
+        {
+          name: 'http',
+          port: 80,
+          targetPort: 8081,
+        },
+      ],
+    },
+  },
+  {
+    dependsOn: deployment,
+  }
+)
+
+// This allows access to the service from outside the cluster
+new k8s.networking.v1.Ingress('invoice-app-ingress', {
+  metadata: {
+    name: 'invoice-app-ingress',
+    namespace: ns.metadata.name,
+    labels: appLabels,
+  },
+  spec: {
+    rules: [
+      {
+        http: {
+          paths: [
+            {
+              path: '/invoices',
+              pathType: 'Prefix',
+              backend: {
+                service: {
+                  name: service.metadata.name,
+                  port: {
+                    name: 'http',
+                  },
+                },
+              },
+            },
+          ],
+        },
       },
     ],
   },

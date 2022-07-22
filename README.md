@@ -35,6 +35,23 @@ In this case, the app did not require any root access, so Dockerfile was changed
 switch to it before running the app binary. Additionally, I slimmed down the image size by removing unnessesary build
 materials, which is a common practice for Go applications.
 
+## Part 2 - Solution
+- [x] 2.1 Deploy both apps to Kubernetes.
+- [x] 2.2 `invoice-app` must be reachable from outside the cluster.
+- [x] 2.3 `payment-provider` must be only reachable from inside the cluster.
+- [ ] 2.4 Update existing `deployment.yaml` files to follow k8s best practices. Feel free to remove existing files, recreate them, and/or introduce different technologies. Follow best practices for any other resources you decide to create.
+- [ ] 2.5 Provide a better way to pass the URL in `invoice-app/main.go` - it's hardcoded at the moment
+- [ ] 2.6 Complete `deploy.sh` in order to automate all the steps needed to have both apps running in a K8s cluster.
+- [ ] 2.7 Complete `test.sh` so we can validate your solution can successfully pay all the unpaid invoices and return a list of all the paid invoices.
+
+Regarding 2.1, I deployed both apps to Kubernetes using Pulumi IAC. I considered instaling local ArgoCD instance to do K8s GitOps, however,
+some other IAC framework would still be needed for provisioning other infrastructure (AWS/GPC), so I decided to go with Pulumi
+right from the start. It was also a tool I was by far the most confortable with.
+
+Regarding 2.2 and 2.3, I added an `nginx-ingress-controller`, and gave `invoice-app` an Ingress, making that service reachable
+from outside of the cluster. I envountered issues with reaching Minikube network inside Docker, so I decided to run it in a
+Hyperkit VM instead.
+
 ## Part 3 - Solution
 - [ ] 3.1 Feel free to express your thoughts and share your experiences with real-world examples you worked with in the past. 
 - [ ] 3.2 What would you do to improve this setup and make it "production ready"?

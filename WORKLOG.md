@@ -15,11 +15,11 @@
 
 #### Part 2
 - [x] 2.1 Deploy both apps to Kubernetes.
-- [ ] 2.2 `invoice-app` must be reachable from outside the cluster.
+- [x] 2.2 `invoice-app` must be reachable from outside the cluster.
 
 *Will need ingress.*
 
-- [ ] 2.3 `payment-provider` must be only reachable from inside the cluster.
+- [x] 2.3 `payment-provider` must be only reachable from inside the cluster.
 
 *No ingress = no access from outside. Might seal shut with K8s RBAC.*
 

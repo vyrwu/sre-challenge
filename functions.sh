@@ -81,7 +81,8 @@ function local_workspace_cleanup() {
 
 function local_workspace_start() {
   info "Starting minikube..."
-  minikube start --cni cilium
+  minikube start --vm --cni cilium
+  minikube addons enable ingress
   cd iac-automation
   npm i
   PULUMI_CONFIG_PASSPHRASE=password npm run start -- up local
