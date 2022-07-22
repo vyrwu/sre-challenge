@@ -46,7 +46,7 @@
 Introduce multi-evironment setup. Setup compliance and security guardrails around AWS accounts. Deliver emepheral/shared dev environments for devs. Create CI/CD with sufficient quality gates (lint/unit/intergration/load/chaos/smoke tests). Sign and promote Docker image across pipeline steps. Optional QA testing manual approval. Auto-deploy to prod. Add telemetry - traces/logs/metrics/alerts. Add DynamoDB to invoice-app, and rewrite payment-provider to be async with SQS. Provision AWS resources with IAC (IAM role auth based on pod roles). 
 
 - [x] There are 2 microservices that are maintained by 2 different teams. Each team should have access only to their service inside the cluster. How would you approach this?
-- [ ] How would you prevent other services running in the cluster to communicate to `payment-provider`?
+- [x] How would you prevent other services running in the cluster to communicate to `payment-provider`?
 
 *Kubernetes RBAC, or AWS IAM (depending on the SSO strategy). Ideally, no developer should have access to non-dev clusters (machine-led CI/CD deploys)*
 

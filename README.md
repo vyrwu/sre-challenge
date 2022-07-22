@@ -39,8 +39,13 @@ materials, which is a common practice for Go applications.
 - [ ] 3.1 Feel free to express your thoughts and share your experiences with real-world examples you worked with in the past. 
 - [ ] 3.2 What would you do to improve this setup and make it "production ready"?
 - [x] 3.3 There are 2 microservices that are maintained by 2 different teams. Each team should have access only to their service inside the cluster. How would you approach this?
-- [ ] 3.4 How would you prevent other services running in the cluster to communicate to `payment-provider`?
+- [x] 3.4 How would you prevent other services running in the cluster to communicate to `payment-provider`?
 
 Regarding 3.3, there are many ways to achieve this. In this example, I have separated apps into isolated namespaces,
 and via Kubernetes RBAC introduced roles limitting developers actions based on the role they assume via AWS IAM. This
 can also be achieved using simple User accounts with rotating credentials, but it is often not a compliant solution.
+
+Regarding 3.4, to prevent other applications running in the cluster to communicate with `payment-provider`, but still allow
+`invoice-app` to use it, this introduced a NetworkPolicy which blocks all ingress traffic to `payment-provider` from all
+pods except the ones belonging to the `invoice-app` deployment. This way, access to each individual application must be
+explicitly granted, and other applications can block all trafic by default, only allowing the expected traffic through.

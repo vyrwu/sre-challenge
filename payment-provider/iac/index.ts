@@ -126,9 +126,9 @@ new k8s.core.v1.Service(
   {
     metadata: {
       name: 'payment-provider',
-      namespace: ns.metadata.name,
       labels: appLabels,
       annotations: commonAnnotations,
+      namespace: ns.metadata.name,
     },
     spec: {
       type: 'ClusterIP',
@@ -143,10 +143,48 @@ new k8s.core.v1.Service(
     },
   },
   {
+    dependsOn: deployment,
     customTimeouts: {
       create: '2m',
     },
   }
 )
+
+new k8s.networking.v1.NetworkPolicy('allow-invoices-ingress', {
+  metadata: {
+    name: 'allow-invoices-ingress',
+    namespace: ns.metadata.name,
+  },
+  spec: {
+    podSelector: {
+      matchLabels: appLabels,
+    },
+    policyTypes: ['Ingress'],
+    ingress: [
+      {
+        from: [
+          {
+            namespaceSelector: {
+              matchLabels: {
+                'kubernetes.io/metadata.name': 'invoices',
+              },
+            },
+            podSelector: {
+              matchLabels: {
+                app: 'invoice-app', // TODO: Can be consumed from Stack Outputs
+              },
+            },
+          },
+        ],
+        ports: [
+          {
+            protocol: 'TCP',
+            port: 8082,
+          },
+        ],
+      },
+    ],
+  },
+})
 
 export const name = deployment.metadata.name
