@@ -10,7 +10,7 @@ import (
 
 func main() {
 	router := setupRouter()
-
+	
 	err := router.Run(":8082")
 	if err != nil {
 		fmt.Printf("could not start server: %v", err)
@@ -20,6 +20,8 @@ func main() {
 func setupRouter() *gin.Engine {
 	r := gin.New()
 	r.POST("payments/pay", pay)
+	r.GET("liveness", checkLiveness)
+	r.GET("readiness", checkReadiness)
 	return r
 }
 
@@ -72,6 +74,15 @@ func pay(c *gin.Context) {
 	c.JSON(http.StatusOK, &payResponse{
 		Id: req.Id,
 	})
+}
+
+func checkReadiness(c *gin.Context) {
+	// No dependencies - nothing to check
+	c.String(http.StatusOK, "ready")
+}
+
+func checkLiveness(c *gin.Context) {
+	c.String(http.StatusOK, "alive")
 }
 
 type payResponse struct {

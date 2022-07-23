@@ -25,6 +25,8 @@ func setupRouter() *gin.Engine {
 	r := gin.New()
 	r.POST("invoices/pay", pay)
 	r.GET("invoices", getInvoices)
+	r.GET("liveness", checkLiveness)
+	r.GET("readiness", checkReadiness)
 	return r
 }
 
@@ -58,6 +60,27 @@ func pay(c *gin.Context) {
 	fmt.Printf("Invoices paid!\n")
 
 	c.JSON(http.StatusOK, gin.H{})
+}
+
+func checkReadiness(c *gin.Context) {
+	_ = dbClient.GetInvoices()
+	client := http.Client{}
+	res, err := client.Get("http://payment-provider/readiness")
+	if err != nil {
+		fmt.Printf("Error %s", err)
+		return
+	}
+	if res.StatusCode != http.StatusOK {
+		buf := new(bytes.Buffer)
+    buf.ReadFrom(res.Body)
+    body := buf.String()
+		c.String(res.StatusCode, body)
+	}
+	c.String(http.StatusOK, "ready")
+}
+
+func checkLiveness(c *gin.Context) {
+	c.String(http.StatusOK, "alive")
 }
 
 var dbClient *db.Client
