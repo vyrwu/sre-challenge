@@ -121,6 +121,16 @@ const deployment = new k8s.apps.v1.Deployment(
                 initialDelaySeconds: 3,
                 periodSeconds: 3,
               },
+              env: [
+                {
+                  name: 'PAYMENT_PROVIDER_PAYMENTS_PAY_URL',
+                  value: 'http://payment-provider/payments/pay',
+                },
+                {
+                  name: 'PAYMENT_PROVIDER_READINESS_URL',
+                  value: 'http://payment-provider/readiness',
+                },
+              ],
             },
           ],
           securityContext: {

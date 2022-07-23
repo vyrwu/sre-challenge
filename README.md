@@ -39,8 +39,8 @@ materials, which is a common practice for Go applications.
 - [x] 2.1 Deploy both apps to Kubernetes.
 - [x] 2.2 `invoice-app` must be reachable from outside the cluster.
 - [x] 2.3 `payment-provider` must be only reachable from inside the cluster.
-- [ ] 2.4 Update existing `deployment.yaml` files to follow k8s best practices. Feel free to remove existing files, recreate them, and/or introduce different technologies. Follow best practices for any other resources you decide to create.
-- [ ] 2.5 Provide a better way to pass the URL in `invoice-app/main.go` - it's hardcoded at the moment
+- [x] 2.4 Update existing `deployment.yaml` files to follow k8s best practices. Feel free to remove existing files, recreate them, and/or introduce different technologies. Follow best practices for any other resources you decide to create.
+- [x] 2.5 Provide a better way to pass the URL in `invoice-app/main.go` - it's hardcoded at the moment
 - [ ] 2.6 Complete `deploy.sh` in order to automate all the steps needed to have both apps running in a K8s cluster.
 - [ ] 2.7 Complete `test.sh` so we can validate your solution can successfully pay all the unpaid invoices and return a list of all the paid invoices.
 
@@ -54,6 +54,7 @@ Hyperkit VM instead.
 
 Regarding 2.4, the following Kubernetes best practices were applied:
 * Added readiness and liveness probes to containers.
+* Passed configuration for `payment-provider` via environmental variables on the Kubernetes Deployment
 
 ## Part 3 - Solution
 - [ ] 3.1 Feel free to express your thoughts and share your experiences with real-world examples you worked with in the past. 
