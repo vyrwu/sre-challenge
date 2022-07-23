@@ -25,7 +25,7 @@ if (!supportedEnvironments.includes(environment)) {
   throw new Error(`Unsupported environment '${environment}'. ${usage}`)
 }
 
-const projects: string[] = ['invoice-app', 'payment-provider']
+const projects: string[] = ['payment-provider', 'invoice-app']
 for (const p of projects) {
   const workDir: string = path.resolve(__dirname, '..', p, 'iac')
   if (environment === 'local') {
