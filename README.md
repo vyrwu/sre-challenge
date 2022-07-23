@@ -52,6 +52,9 @@ Regarding 2.2 and 2.3, I added an `nginx-ingress-controller`, and gave `invoice-
 from outside of the cluster. I envountered issues with reaching Minikube network inside Docker, so I decided to run it in a
 Hyperkit VM instead.
 
+Regarding 2.4, the following Kubernetes best practices were applied:
+* Added readiness and liveness probes to containers.
+
 ## Part 3 - Solution
 - [ ] 3.1 Feel free to express your thoughts and share your experiences with real-world examples you worked with in the past. 
 - [ ] 3.2 What would you do to improve this setup and make it "production ready"?

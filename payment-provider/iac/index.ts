@@ -11,6 +11,8 @@ const appLabels = {
   app: 'payment-provider',
 }
 
+const appPort = 8082
+
 // TODO: RBAC and Namespace management should probably be managed by SRE
 // TODO: Can be more DRY (move into shared Pulumi module)
 const ns: k8s.core.v1.Namespace = new k8s.core.v1.Namespace('payments', {
@@ -102,9 +104,25 @@ const deployment = new k8s.apps.v1.Deployment(
               ports: [
                 {
                   name: 'http',
-                  containerPort: 8082,
+                  containerPort: appPort,
                 },
               ],
+              livenessProbe: {
+                httpGet: {
+                  path: '/liveness',
+                  port: appPort,
+                },
+                initialDelaySeconds: 3,
+                periodSeconds: 3,
+              },
+              readinessProbe: {
+                httpGet: {
+                  path: '/readiness',
+                  port: appPort,
+                },
+                initialDelaySeconds: 3,
+                periodSeconds: 3,
+              },
             },
           ],
           securityContext: {
@@ -137,7 +155,7 @@ new k8s.core.v1.Service(
         {
           name: 'http',
           port: 80,
-          targetPort: 8082, // TODO: Consume from payments stack outputs
+          targetPort: appPort,
         },
       ],
     },
@@ -179,7 +197,7 @@ new k8s.networking.v1.NetworkPolicy('allow-invoices-ingress', {
         ports: [
           {
             protocol: 'TCP',
-            port: 8082,
+            port: appPort,
           },
         ],
       },
