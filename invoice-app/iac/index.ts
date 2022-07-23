@@ -83,7 +83,6 @@ const deployment = new k8s.apps.v1.Deployment(
       annotations: commonAnnotations,
     },
     spec: {
-      replicas: 3,
       selector: {
         matchLabels: appLabels,
       },
@@ -121,6 +120,16 @@ const deployment = new k8s.apps.v1.Deployment(
                 initialDelaySeconds: 3,
                 periodSeconds: 3,
               },
+              resources: {
+                requests: {
+                  cpu: '50m',
+                  memory: '50Mi',
+                },
+                limits: {
+                  cpu: '100m',
+                  memory: '100Mi',
+                },
+              },
               env: [
                 {
                   name: 'PAYMENT_PROVIDER_PAYMENTS_PAY_URL',
@@ -146,6 +155,34 @@ const deployment = new k8s.apps.v1.Deployment(
     },
   }
 )
+
+new k8s.autoscaling.v2.HorizontalPodAutoscaler('invoice-app-cpu', {
+  metadata: {
+    name: 'invoice-app-cpu',
+    annotations: commonAnnotations,
+  },
+  spec: {
+    scaleTargetRef: {
+      apiVersion: deployment.apiVersion,
+      kind: deployment.kind,
+      name: deployment.metadata.name,
+    },
+    minReplicas: 1,
+    maxReplicas: 3,
+    metrics: [
+      {
+        type: 'Resource',
+        resource: {
+          name: 'cpu',
+          target: {
+            type: 'Utilization',
+            averageUtilization: 50,
+          },
+        },
+      },
+    ],
+  },
+})
 
 // This allows 'invoice-app` to discover `payment-provider` in another namespace.
 // It's not enought to make the connection work - `payment-provider` must explicitly

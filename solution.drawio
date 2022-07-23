@@ -1,29 +1,29 @@
 <mxfile host="65bd71144e">
     <diagram id="NW6HLIrqErbMiRj-WH_E" name="Page-1">
-        <mxGraphModel dx="792" dy="2069" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+        <mxGraphModel dx="1010" dy="2557" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
             <root>
                 <mxCell id="0"/>
                 <mxCell id="1" parent="0"/>
                 <mxCell id="101" value="" style="group" parent="1" vertex="1" connectable="0">
-                    <mxGeometry x="50" y="-640" width="1100" height="920" as="geometry"/>
+                    <mxGeometry x="50" y="-660" width="1100" height="920" as="geometry"/>
                 </mxCell>
                 <mxCell id="106" value="" style="group" parent="101" vertex="1" connectable="0">
-                    <mxGeometry width="1100" height="780" as="geometry"/>
+                    <mxGeometry width="1100" height="800" as="geometry"/>
                 </mxCell>
                 <mxCell id="4" value="" style="rounded=0;whiteSpace=wrap;html=1;" parent="106" vertex="1">
-                    <mxGeometry width="1100" height="780" as="geometry"/>
+                    <mxGeometry width="1100" height="799.9999999999999" as="geometry"/>
                 </mxCell>
                 <mxCell id="5" value="&lt;i&gt;Cluster&lt;br&gt;local&lt;br&gt;&lt;/i&gt;" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" parent="106" vertex="1">
-                    <mxGeometry x="10" y="10" width="160.5" height="53.53448275862068" as="geometry"/>
+                    <mxGeometry x="10" y="10.256410256410255" width="160.5" height="54.907161803713514" as="geometry"/>
                 </mxCell>
                 <mxCell id="82" value="&lt;i&gt;ClusterRoleBinding&lt;br&gt;&lt;/i&gt;&lt;i&gt;full-access&lt;br&gt;&lt;/i&gt;" style="rounded=0;whiteSpace=wrap;html=1;dashed=1;" parent="106" vertex="1">
-                    <mxGeometry x="482.6009436089015" y="30.00373134328356" width="134.29905639109853" height="41.19402985074627" as="geometry"/>
+                    <mxGeometry x="482.6009436089015" y="30.773057787983138" width="134.29905639109853" height="42.250287026406426" as="geometry"/>
                 </mxCell>
                 <mxCell id="79" value="&lt;i&gt;ClusterRole&lt;br&gt;&lt;/i&gt;&lt;i&gt;admin&lt;/i&gt;&lt;i&gt;&lt;br&gt;&lt;/i&gt;" style="rounded=0;whiteSpace=wrap;html=1;dashed=1;" parent="106" vertex="1">
-                    <mxGeometry x="412.6009436089015" y="89.04850746268656" width="134.29905639109853" height="41.19402985074627" as="geometry"/>
+                    <mxGeometry x="412.6009436089015" y="91.33180252583236" width="134.29905639109853" height="42.250287026406426" as="geometry"/>
                 </mxCell>
                 <mxCell id="92" value="&lt;i&gt;Group&lt;br&gt;admin&lt;br&gt;&lt;/i&gt;" style="rounded=0;whiteSpace=wrap;html=1;dashed=1;" parent="106" vertex="1">
-                    <mxGeometry x="553.1009436089015" y="89.04850746268656" width="134.29905639109853" height="41.19402985074627" as="geometry"/>
+                    <mxGeometry x="553.1009436089015" y="91.33180252583236" width="134.29905639109853" height="42.250287026406426" as="geometry"/>
                 </mxCell>
                 <mxCell id="93" style="edgeStyle=none;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;exitX=0.25;exitY=1;exitDx=0;exitDy=0;" parent="106" source="82" target="79" edge="1">
                     <mxGeometry relative="1" as="geometry"/>
@@ -31,83 +31,23 @@
                 <mxCell id="94" style="edgeStyle=none;html=1;exitX=0.75;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" parent="106" source="82" target="92" edge="1">
                     <mxGeometry relative="1" as="geometry"/>
                 </mxCell>
-                <mxCell id="11" value="" style="group" parent="101" vertex="1" connectable="0">
-                    <mxGeometry x="90" y="170" width="491.63" height="552.54" as="geometry"/>
-                </mxCell>
-                <mxCell id="7" value="" style="rounded=0;whiteSpace=wrap;html=1;" parent="11" vertex="1">
-                    <mxGeometry width="430" height="552.54" as="geometry"/>
-                </mxCell>
-                <mxCell id="8" value="&lt;i&gt;Namespace&lt;br&gt;invoices&lt;br&gt;&lt;/i&gt;" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" parent="11" vertex="1">
-                    <mxGeometry x="-0.0034285714285715585" y="-0.00007206896561484655" width="168.55885714285714" height="70.25831896551723" as="geometry"/>
-                </mxCell>
-                <mxCell id="28" value="" style="group" parent="11" vertex="1" connectable="0">
-                    <mxGeometry x="32.49" y="89.31" width="360" height="410.69" as="geometry"/>
-                </mxCell>
-                <mxCell id="13" value="" style="rounded=0;whiteSpace=wrap;html=1;" parent="28" vertex="1">
-                    <mxGeometry width="360" height="410.69" as="geometry"/>
-                </mxCell>
-                <mxCell id="14" value="&lt;i&gt;Deployment&lt;br&gt;invoice-app&lt;br&gt;&lt;/i&gt;" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" parent="28" vertex="1">
-                    <mxGeometry width="110" height="80" as="geometry"/>
-                </mxCell>
-                <mxCell id="38" value="&lt;i&gt;Service&lt;br&gt;&lt;/i&gt;&lt;i&gt;payment-provider-dns&lt;/i&gt;&lt;i&gt;&lt;br&gt;&lt;/i&gt;" style="rounded=0;whiteSpace=wrap;html=1;" parent="28" vertex="1">
-                    <mxGeometry x="200.5109436089015" y="110.69000000000005" width="134.29905639109853" height="60" as="geometry"/>
-                </mxCell>
-                <mxCell id="15" value="&lt;i&gt;Service&lt;br&gt;&lt;/i&gt;&lt;i&gt;invoice-app&lt;/i&gt;&lt;i&gt;&lt;br&gt;&lt;/i&gt;" style="rounded=0;whiteSpace=wrap;html=1;" parent="28" vertex="1">
-                    <mxGeometry x="40.510000000000005" y="110.69000000000005" width="120" height="60" as="geometry"/>
-                </mxCell>
-                <mxCell id="26" value="" style="group" parent="28" vertex="1" connectable="0">
-                    <mxGeometry x="20.509999999999998" y="210.69000000000005" width="140" height="80" as="geometry"/>
-                </mxCell>
-                <mxCell id="21" value="&lt;i&gt;pod&lt;br&gt;payment-provider&lt;/i&gt;" style="rounded=0;whiteSpace=wrap;html=1;" parent="26" vertex="1">
-                    <mxGeometry width="120" height="60" as="geometry"/>
-                </mxCell>
-                <mxCell id="24" value="&lt;i&gt;pod&lt;br&gt;payment-provider&lt;/i&gt;" style="rounded=0;whiteSpace=wrap;html=1;" parent="26" vertex="1">
-                    <mxGeometry x="10" y="10" width="120" height="60" as="geometry"/>
-                </mxCell>
-                <mxCell id="25" value="&lt;i&gt;Pod&lt;br&gt;&lt;/i&gt;&lt;i&gt;invoice-app&lt;/i&gt;&lt;i&gt;&lt;br&gt;&lt;/i&gt;" style="rounded=0;whiteSpace=wrap;html=1;" parent="26" vertex="1">
-                    <mxGeometry x="20" y="20" width="120" height="60" as="geometry"/>
-                </mxCell>
-                <mxCell id="40" style="edgeStyle=none;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" parent="28" source="15" target="25" edge="1">
-                    <mxGeometry relative="1" as="geometry"/>
-                </mxCell>
-                <mxCell id="88" style="edgeStyle=none;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" parent="28" source="80" target="83" edge="1">
-                    <mxGeometry relative="1" as="geometry"/>
-                </mxCell>
-                <mxCell id="80" value="&lt;i&gt;RoleBinding&lt;br&gt;&lt;/i&gt;&lt;i&gt;invoices-full-access&lt;/i&gt;&lt;i&gt;&lt;br&gt;&lt;/i&gt;" style="rounded=0;whiteSpace=wrap;html=1;" parent="28" vertex="1">
-                    <mxGeometry x="200.51094360890147" y="230.69" width="134.29905639109853" height="60" as="geometry"/>
-                </mxCell>
-                <mxCell id="83" value="&lt;i&gt;Role&lt;br&gt;&lt;/i&gt;&lt;i&gt;invoices-admin&lt;/i&gt;&lt;i&gt;&lt;br&gt;&lt;/i&gt;" style="rounded=0;whiteSpace=wrap;html=1;" parent="28" vertex="1">
-                    <mxGeometry x="200.51094360890147" y="310.69" width="134.29905639109853" height="60" as="geometry"/>
-                </mxCell>
-                <mxCell id="89" value="&lt;i&gt;Group&lt;br&gt;invoices-developers&lt;br&gt;&lt;/i&gt;" style="rounded=0;whiteSpace=wrap;html=1;dashed=1;" parent="28" vertex="1">
-                    <mxGeometry x="33.36094360890146" y="310.69" width="134.29905639109853" height="60" as="geometry"/>
-                </mxCell>
-                <mxCell id="91" style="edgeStyle=none;html=1;exitX=0;exitY=1;exitDx=0;exitDy=0;entryX=1;entryY=0;entryDx=0;entryDy=0;" parent="28" source="80" target="89" edge="1">
-                    <mxGeometry relative="1" as="geometry"/>
-                </mxCell>
-                <mxCell id="108" value="&lt;i&gt;Ingress&lt;br&gt;&lt;/i&gt;&lt;i&gt;invoice-app-ingress&lt;br&gt;&lt;/i&gt;" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="28">
-                    <mxGeometry x="200.51094360890147" y="30.690000000000055" width="134.29905639109853" height="60" as="geometry"/>
-                </mxCell>
                 <mxCell id="61" value="" style="rounded=0;whiteSpace=wrap;html=1;" parent="101" vertex="1">
-                    <mxGeometry x="600" y="170" width="430" height="552.54" as="geometry"/>
+                    <mxGeometry x="600" y="170" width="430" height="600" as="geometry"/>
                 </mxCell>
                 <mxCell id="62" value="&lt;i&gt;Namespace&lt;br&gt;payments&lt;br&gt;&lt;/i&gt;" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" parent="101" vertex="1">
                     <mxGeometry x="599.9965714285714" y="169.99992793103434" width="168.55885714285714" height="70.25831896551723" as="geometry"/>
                 </mxCell>
-                <mxCell id="63" value="" style="group" parent="101" vertex="1" connectable="0">
-                    <mxGeometry x="632.49" y="259.30999999999995" width="360" height="410.69" as="geometry"/>
+                <mxCell id="64" value="" style="rounded=0;whiteSpace=wrap;html=1;" parent="101" vertex="1">
+                    <mxGeometry x="632.49" y="259.31" width="360" height="490.69" as="geometry"/>
                 </mxCell>
-                <mxCell id="64" value="" style="rounded=0;whiteSpace=wrap;html=1;" parent="63" vertex="1">
-                    <mxGeometry width="360" height="410.69" as="geometry"/>
+                <mxCell id="65" value="&lt;i&gt;Deployment&lt;br&gt;payment-provider&lt;br&gt;&lt;/i&gt;" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" parent="101" vertex="1">
+                    <mxGeometry x="632.49" y="259.30999999999995" width="130" height="80" as="geometry"/>
                 </mxCell>
-                <mxCell id="65" value="&lt;i&gt;Deployment&lt;br&gt;payment-provider&lt;br&gt;&lt;/i&gt;" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" parent="63" vertex="1">
-                    <mxGeometry width="130" height="80" as="geometry"/>
+                <mxCell id="67" value="&lt;i&gt;Service&lt;br&gt;&lt;/i&gt;&lt;i&gt;payment-provider&lt;/i&gt;&lt;i&gt;&lt;br&gt;&lt;/i&gt;" style="rounded=0;whiteSpace=wrap;html=1;" parent="101" vertex="1">
+                    <mxGeometry x="673" y="370" width="120" height="60" as="geometry"/>
                 </mxCell>
-                <mxCell id="67" value="&lt;i&gt;Service&lt;br&gt;&lt;/i&gt;&lt;i&gt;payment-provider&lt;/i&gt;&lt;i&gt;&lt;br&gt;&lt;/i&gt;" style="rounded=0;whiteSpace=wrap;html=1;" parent="63" vertex="1">
-                    <mxGeometry x="40.510000000000005" y="110.69000000000005" width="120" height="60" as="geometry"/>
-                </mxCell>
-                <mxCell id="68" value="" style="group" parent="63" vertex="1" connectable="0">
-                    <mxGeometry x="20.509999999999998" y="210.69000000000005" width="140" height="80" as="geometry"/>
+                <mxCell id="68" value="" style="group" parent="101" vertex="1" connectable="0">
+                    <mxGeometry x="653" y="470" width="140" height="80" as="geometry"/>
                 </mxCell>
                 <mxCell id="69" value="&lt;i&gt;pod&lt;br&gt;payment-provider&lt;/i&gt;" style="rounded=0;whiteSpace=wrap;html=1;" parent="68" vertex="1">
                     <mxGeometry width="120" height="60" as="geometry"/>
@@ -118,28 +58,85 @@
                 <mxCell id="71" value="&lt;i&gt;Pod&lt;br&gt;&lt;/i&gt;&lt;i&gt;payment-provider&lt;/i&gt;&lt;i&gt;&lt;br&gt;&lt;/i&gt;" style="rounded=0;whiteSpace=wrap;html=1;" parent="68" vertex="1">
                     <mxGeometry x="20" y="20" width="120" height="60" as="geometry"/>
                 </mxCell>
-                <mxCell id="72" style="edgeStyle=none;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" parent="63" source="67" target="71" edge="1">
+                <mxCell id="72" style="edgeStyle=none;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" parent="101" source="67" target="71" edge="1">
                     <mxGeometry relative="1" as="geometry"/>
                 </mxCell>
-                <mxCell id="104" style="edgeStyle=none;html=1;exitX=0;exitY=1;exitDx=0;exitDy=0;entryX=1;entryY=0;entryDx=0;entryDy=0;" parent="63" source="81" target="103" edge="1">
+                <mxCell id="104" style="edgeStyle=none;html=1;exitX=0;exitY=1;exitDx=0;exitDy=0;entryX=1;entryY=0;entryDx=0;entryDy=0;" parent="101" source="81" target="103" edge="1">
                     <mxGeometry relative="1" as="geometry"/>
                 </mxCell>
-                <mxCell id="105" style="edgeStyle=none;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" parent="63" source="81" target="84" edge="1">
+                <mxCell id="105" style="edgeStyle=none;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" parent="101" source="81" target="84" edge="1">
                     <mxGeometry relative="1" as="geometry"/>
                 </mxCell>
-                <mxCell id="81" value="&lt;i&gt;RoleBinding&lt;br&gt;&lt;/i&gt;&lt;i&gt;payments-full-access&lt;/i&gt;&lt;i&gt;&lt;br&gt;&lt;/i&gt;" style="rounded=0;whiteSpace=wrap;html=1;" parent="63" vertex="1">
-                    <mxGeometry x="205.3609436089015" y="230.69000000000005" width="134.29905639109853" height="60" as="geometry"/>
+                <mxCell id="81" value="&lt;i&gt;RoleBinding&lt;br&gt;&lt;/i&gt;&lt;i&gt;payments-full-access&lt;/i&gt;&lt;i&gt;&lt;br&gt;&lt;/i&gt;" style="rounded=0;whiteSpace=wrap;html=1;" parent="101" vertex="1">
+                    <mxGeometry x="833.8509436089015" y="582.54" width="134.29905639109853" height="60" as="geometry"/>
                 </mxCell>
-                <mxCell id="84" value="&lt;i&gt;Role&lt;br&gt;&lt;/i&gt;&lt;i&gt;payments-admin&lt;/i&gt;&lt;i&gt;&lt;br&gt;&lt;/i&gt;" style="rounded=0;whiteSpace=wrap;html=1;" parent="63" vertex="1">
-                    <mxGeometry x="205.3609436089015" y="310.69000000000005" width="134.29905639109853" height="60" as="geometry"/>
+                <mxCell id="84" value="&lt;i&gt;Role&lt;br&gt;&lt;/i&gt;&lt;i&gt;payments-admin&lt;/i&gt;&lt;i&gt;&lt;br&gt;&lt;/i&gt;" style="rounded=0;whiteSpace=wrap;html=1;" parent="101" vertex="1">
+                    <mxGeometry x="833.8509436089015" y="662.54" width="134.29905639109853" height="60" as="geometry"/>
                 </mxCell>
-                <mxCell id="102" value="&lt;i&gt;NetworkPolicy&lt;br&gt;&lt;/i&gt;&lt;i&gt;allow-invoices-app-ingress&lt;/i&gt;&lt;i&gt;&lt;br&gt;&lt;/i&gt;" style="rounded=0;whiteSpace=wrap;html=1;" parent="63" vertex="1">
-                    <mxGeometry x="205.36" y="110.69" width="124.64" height="60" as="geometry"/>
+                <mxCell id="102" value="&lt;i&gt;NetworkPolicy&lt;br&gt;&lt;/i&gt;&lt;i&gt;allow-invoices-app-ingress&lt;/i&gt;&lt;i&gt;&lt;br&gt;&lt;/i&gt;" style="rounded=0;whiteSpace=wrap;html=1;" parent="101" vertex="1">
+                    <mxGeometry x="837.85" y="369.99999999999994" width="124.64" height="60" as="geometry"/>
                 </mxCell>
-                <mxCell id="103" value="&lt;i&gt;Group&lt;br&gt;payments-developers&lt;br&gt;&lt;/i&gt;" style="rounded=0;whiteSpace=wrap;html=1;dashed=1;" parent="63" vertex="1">
-                    <mxGeometry x="33.36094360890149" y="310.69000000000005" width="134.29905639109853" height="60" as="geometry"/>
+                <mxCell id="103" value="&lt;i&gt;Group&lt;br&gt;payments-developers&lt;br&gt;&lt;/i&gt;" style="rounded=0;whiteSpace=wrap;html=1;dashed=1;" parent="101" vertex="1">
+                    <mxGeometry x="661.8509436089015" y="662.54" width="134.29905639109853" height="60" as="geometry"/>
                 </mxCell>
-                <mxCell id="41" style="edgeStyle=none;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" parent="101" source="38" target="67" edge="1">
+                <mxCell id="110" value="&lt;i&gt;HorizontalPodAutoscaler&lt;br&gt;&lt;/i&gt;&lt;i&gt;payment-provider-cpu&lt;br&gt;&lt;/i&gt;" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="101">
+                    <mxGeometry x="828.51" y="470" width="143.32" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="7" value="" style="rounded=0;whiteSpace=wrap;html=1;" parent="101" vertex="1">
+                    <mxGeometry x="90" y="170" width="430" height="600" as="geometry"/>
+                </mxCell>
+                <mxCell id="8" value="&lt;i&gt;Namespace&lt;br&gt;invoices&lt;br&gt;&lt;/i&gt;" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" parent="101" vertex="1">
+                    <mxGeometry x="89.99657142857143" y="169.9999279310344" width="168.55885714285714" height="70.25831896551723" as="geometry"/>
+                </mxCell>
+                <mxCell id="13" value="" style="rounded=0;whiteSpace=wrap;html=1;" parent="101" vertex="1">
+                    <mxGeometry x="122.49" y="259.31" width="360" height="490.69" as="geometry"/>
+                </mxCell>
+                <mxCell id="14" value="&lt;i&gt;Deployment&lt;br&gt;invoice-app&lt;br&gt;&lt;/i&gt;" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" parent="101" vertex="1">
+                    <mxGeometry x="122.49000000000001" y="259.31" width="110" height="80" as="geometry"/>
+                </mxCell>
+                <mxCell id="38" value="&lt;i&gt;Service&lt;br&gt;&lt;/i&gt;&lt;i&gt;payment-provider-dns&lt;/i&gt;&lt;i&gt;&lt;br&gt;&lt;/i&gt;" style="rounded=0;whiteSpace=wrap;html=1;" parent="101" vertex="1">
+                    <mxGeometry x="323.0009436089015" y="370.00000000000006" width="134.29905639109853" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="15" value="&lt;i&gt;Service&lt;br&gt;&lt;/i&gt;&lt;i&gt;invoice-app&lt;/i&gt;&lt;i&gt;&lt;br&gt;&lt;/i&gt;" style="rounded=0;whiteSpace=wrap;html=1;" parent="101" vertex="1">
+                    <mxGeometry x="163" y="370.00000000000006" width="120" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="26" value="" style="group" parent="101" vertex="1" connectable="0">
+                    <mxGeometry x="143" y="470.00000000000006" width="140" height="80" as="geometry"/>
+                </mxCell>
+                <mxCell id="21" value="&lt;i&gt;pod&lt;br&gt;payment-provider&lt;/i&gt;" style="rounded=0;whiteSpace=wrap;html=1;" parent="26" vertex="1">
+                    <mxGeometry width="120" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="24" value="&lt;i&gt;pod&lt;br&gt;payment-provider&lt;/i&gt;" style="rounded=0;whiteSpace=wrap;html=1;" parent="26" vertex="1">
+                    <mxGeometry x="10" y="10" width="120" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="25" value="&lt;i&gt;Pod&lt;br&gt;&lt;/i&gt;&lt;i&gt;invoice-app&lt;/i&gt;&lt;i&gt;&lt;br&gt;&lt;/i&gt;" style="rounded=0;whiteSpace=wrap;html=1;" parent="26" vertex="1">
+                    <mxGeometry x="20" y="20" width="120" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="40" style="edgeStyle=none;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" parent="101" source="15" target="25" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="88" style="edgeStyle=none;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" parent="101" source="80" target="83" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="80" value="&lt;i&gt;RoleBinding&lt;br&gt;&lt;/i&gt;&lt;i&gt;invoices-full-access&lt;/i&gt;&lt;i&gt;&lt;br&gt;&lt;/i&gt;" style="rounded=0;whiteSpace=wrap;html=1;" parent="101" vertex="1">
+                    <mxGeometry x="318.9109436089015" y="580" width="134.29905639109853" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="83" value="&lt;i&gt;Role&lt;br&gt;&lt;/i&gt;&lt;i&gt;invoices-admin&lt;/i&gt;&lt;i&gt;&lt;br&gt;&lt;/i&gt;" style="rounded=0;whiteSpace=wrap;html=1;" parent="101" vertex="1">
+                    <mxGeometry x="318.9109436089015" y="660" width="134.29905639109853" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="89" value="&lt;i&gt;Group&lt;br&gt;invoices-developers&lt;br&gt;&lt;/i&gt;" style="rounded=0;whiteSpace=wrap;html=1;dashed=1;" parent="101" vertex="1">
+                    <mxGeometry x="151.76094360890147" y="660" width="134.29905639109853" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="91" style="edgeStyle=none;html=1;exitX=0;exitY=1;exitDx=0;exitDy=0;entryX=1;entryY=0;entryDx=0;entryDy=0;" parent="101" source="80" target="89" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="108" value="&lt;i&gt;Ingress&lt;br&gt;&lt;/i&gt;&lt;i&gt;invoice-app-ingress&lt;br&gt;&lt;/i&gt;" style="rounded=0;whiteSpace=wrap;html=1;" parent="101" vertex="1">
+                    <mxGeometry x="148.70094360890147" y="580" width="134.29905639109853" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="111" value="&lt;i&gt;HorizontalPodAutoscaler&lt;br&gt;&lt;/i&gt;&lt;i&gt;invoice-app-cpu&lt;br&gt;&lt;/i&gt;" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="101">
+                    <mxGeometry x="318.49" y="470" width="143.32" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="41" style="edgeStyle=none;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;strokeWidth=2;" parent="101" source="38" target="67" edge="1">
                     <mxGeometry relative="1" as="geometry">
                         <mxPoint x="742.6726804123709" y="403.8046114308472" as="targetPoint"/>
                     </mxGeometry>

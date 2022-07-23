@@ -55,6 +55,8 @@ Hyperkit VM instead.
 Regarding 2.4, the following Kubernetes best practices were applied:
 * Added readiness and liveness probes to containers.
 * Passed configuration for `payment-provider` via environmental variables on the Kubernetes Deployment
+* Added resource requests and limits to deployments.
+* Add HorizontalPodAutoscalers to scale replicas based on simple CPU metric
 
 ## Part 3 - Solution
 - [ ] 3.1 Feel free to express your thoughts and share your experiences with real-world examples you worked with in the past. 
