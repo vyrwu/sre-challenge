@@ -5,6 +5,7 @@ import (
 	"encoding/json"
 	"fmt"
 	"net/http"
+	"os"
 	"pleo.io/invoice-app/db"
 
 	"github.com/gin-gonic/gin"
@@ -47,7 +48,8 @@ func pay(c *gin.Context) {
 		}
 		b, err := json.Marshal(req)
 		data := bytes.NewBuffer(b)
-		_, err = client.Post("http://payment-provider/payments/pay", "application/json", data)
+
+		_, err = client.Post(lookupEnv("PAYMENT_PROVIDER_PAYMENTS_PAY_URL"), "application/json", data)
 
 		if err != nil {
 			fmt.Printf("Error %s", err)
@@ -65,7 +67,7 @@ func pay(c *gin.Context) {
 func checkReadiness(c *gin.Context) {
 	_ = dbClient.GetInvoices()
 	client := http.Client{}
-	res, err := client.Get("http://payment-provider/readiness")
+	res, err := client.Get(lookupEnv("PAYMENT_PROVIDER_READINESS_URL"))
 	if err != nil {
 		fmt.Printf("Error %s", err)
 		return
@@ -89,4 +91,15 @@ type payRequest struct {
 	Id       string  `json:"id"`
 	Value    float32 `json:"value"`
 	Currency string  `json:"currency"`
+}
+
+// getFromEnv returns a value of the environmental variable by name,
+// or panics if the value is unset.
+// name - name of the environmental variable to lookup
+func lookupEnv(name string) string {
+	val := os.Getenv(name)
+	if val == "" {
+		panic(fmt.Sprintf("Required environmental variable '%s' not set! Inspect the 'env' block of the Kubernetes Deployment object. Crashing...", name))
+	}
+	return val
 }
