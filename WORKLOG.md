@@ -58,6 +58,6 @@ Introduce multi-evironment setup. Setup compliance and security guardrails aroun
 - [x] Setup IAC
 - [x] Debug services
 - [x] Create setup scripts
-- [ ] Implement the solution, adjust the apps
+- [x] Implement the solution, adjust the apps
 - [ ] Write integration tests
-- [ ] Ensure documentation
+- [x] Ensure documentation

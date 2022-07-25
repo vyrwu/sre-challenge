@@ -4,16 +4,40 @@ Code challenge hand-out during the recruitment process of Aleksander Nowak, for 
 
 ## Requirements
 
-macOS with `brew`.
+macOS instance with `brew`.
 
 ## Local Development
 
-Setup script in the repo will install all required binaries, configure your local development environment running on top of Minikube,
-and Pulumi with a local filesystem backed, and deploy all applications to it. Note that it may upgrade versions of some of the binaries
-to latest.
+Setup script in the repo will install all required binaries, configure your local development environment and deploy all microservices to it.
+Note that it may upgrade versions of some of the binaries to latest.
 
 ```sh
-bash setup.sh
+make deploy-local
+```
+
+Resulting should be a local Minikube Kubernetes cluster running inside the VM on your local machine, with applications deployed to it via
+Pulumi with local filesystem backends.
+
+### Updating projects individually
+You can control local Pulumi stacks using individually using the provided NPM scripts under `invoice-app/iac/package.json` and `payment-provider/iac/package.json`.
+```sh
+cd ${PROJECT_ROOT}/invoice-app/iac
+npm run up-local 
+npm run refresh-local
+npm run destroy-local
+
+cd ${PROJECT_ROOT}/payment-provider/iac
+npm run up-local
+npm run refresh-local
+npm run destroy-local
+```
+
+### Updating all projects in bulk
+You can also update all microservices at the same time using NPM scripts provided with the `iac-automation/package.json` project.
+```sh
+cd ${PROJECT_ROOT}/iac-automation
+npm run up-local
+npm run destroy-local
 ```
 
 ## Setup - Solution
@@ -41,7 +65,7 @@ materials, which is a common practice for Go applications.
 - [x] 2.3 `payment-provider` must be only reachable from inside the cluster.
 - [x] 2.4 Update existing `deployment.yaml` files to follow k8s best practices. Feel free to remove existing files, recreate them, and/or introduce different technologies. Follow best practices for any other resources you decide to create.
 - [x] 2.5 Provide a better way to pass the URL in `invoice-app/main.go` - it's hardcoded at the moment
-- [ ] 2.6 Complete `deploy.sh` in order to automate all the steps needed to have both apps running in a K8s cluster.
+- [x] 2.6 Complete `deploy.sh` in order to automate all the steps needed to have both apps running in a K8s cluster.
 - [ ] 2.7 Complete `test.sh` so we can validate your solution can successfully pay all the unpaid invoices and return a list of all the paid invoices.
 
 Regarding 2.1, I deployed both apps to Kubernetes using Pulumi IAC. I considered instaling local ArgoCD instance to do K8s GitOps, however,
@@ -54,10 +78,14 @@ Hyperkit VM instead.
 
 Regarding 2.4, the following Kubernetes best practices were applied:
 * Added readiness and liveness probes to containers.
-* Passed configuration for `payment-provider` via environmental variables on the Kubernetes Deployment
+* Passed configuration for `payment-provider` via environmental variables on the Kubernetes Deployment (adresses 2.5)
 * Added resource requests and limits to deployments.
 * Added HorizontalPodAutoscalers to scale replicas based on simple CPU metric
 * Added conventional labels to all Kubernetes resources created with Pulumi
+
+Regarding 2.6, all setups required to deploy a local development environment for the apps was automated using Bash scripts,
+and the Makefile was updated to expose options to do execute those scripts. All scripts reside under the `scripts/` directory.
+Documentation inside `README.md` serves as instructions on handling local development using the setup.
 
 ## Part 3 - Solution
 - [ ] 3.1 Feel free to express your thoughts and share your experiences with real-world examples you worked with in the past. 

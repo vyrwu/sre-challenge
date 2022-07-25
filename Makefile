@@ -1,2 +1,2 @@
-deploy:
-	./deploy.sh
+deploy-local:
+	bash ./scripts/deploy-local.sh

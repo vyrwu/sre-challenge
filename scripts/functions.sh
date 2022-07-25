@@ -41,8 +41,13 @@ function vergte() {
 
 # TODO: lock versions
 function brew_dependencies() {
+
+  if ! which "brew" &>/dev/null; then
+    fail "Brew not detected! Please install brew before running this script. Website: https://brew.sh/. Exitting."
+  fi
+
   info "Checking dependencies:"
-  brew_dependencies=(jq kubectl minikube@1.26.0 pulumi)
+  brew_dependencies=(jq kubectl minikube@1.26.0 pulumi hyperkit docker)
 
   for ((i = 0 ; i < ${#brew_dependencies[@]} ; i++)); do
     IFS=$'@' read -r -a dep_split <<<"${brew_dependencies[i]}"
