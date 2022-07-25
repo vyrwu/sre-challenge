@@ -1,76 +1,115 @@
 import * as pulumi from '@pulumi/pulumi'
 import * as k8s from '@pulumi/kubernetes'
 
-const commonAnnotations = {
-  // Stack name is an environment name
-  'pleo.io/environment': pulumi.getStack(),
-  'pleo.io/domain': 'invoices',
+const buildConventionalResourceConfiguration = (appName: string, appDomain: string) => {
+  const conventionalResourceLabels: {
+    [key: string]: string
+  } = {
+    // Stack name is an environment name
+    'pleo.io/environment': pulumi.getStack(),
+    'pleo.io/app-name': appName,
+    'pleo.io/domain': appDomain,
+  }
+
+  const addConventionalKubernetesResourceConfiguration = (
+    args: pulumi.ResourceTransformationArgs
+  ) => {
+    if (!args.type.startsWith('kubernetes')) {
+      return undefined
+    }
+    const newProps: pulumi.Input<{ [key: string]: any }> = args.props
+    newProps.metadata.labels = {
+      ...newProps.metadata.labels,
+      ...conventionalResourceLabels,
+    }
+    return {
+      props: newProps,
+      opts: args.opts,
+    }
+  }
+
+  return {
+    conventionalResourceLabels,
+    addConventionalKubernetesResourceConfiguration,
+  }
 }
 
-const appLabels = {
-  app: 'invoice-app',
-}
-
+const appName = 'invoice-app'
+const appDomain = 'invoices'
 const appPort = 8081
+
+const { addConventionalKubernetesResourceConfiguration } = buildConventionalResourceConfiguration(
+  appName,
+  appDomain
+)
 
 // TODO: RBAC and Namespace management should probably be managed by SRE
 // TODO: Can be more DRY (move into shared Pulumi module)
-const ns: k8s.core.v1.Namespace = new k8s.core.v1.Namespace('invoices', {
-  metadata: {
-    name: 'invoices',
-    annotations: commonAnnotations,
+const ns: k8s.core.v1.Namespace = new k8s.core.v1.Namespace(
+  'invoices',
+  {
+    metadata: {
+      name: 'invoices',
+    },
   },
-})
+  { transformations: [addConventionalKubernetesResourceConfiguration] }
+)
 
-const r: k8s.rbac.v1.Role = new k8s.rbac.v1.Role('invoices-admin', {
-  metadata: {
-    namespace: ns.metadata.name,
-    annotations: commonAnnotations,
+const r: k8s.rbac.v1.Role = new k8s.rbac.v1.Role(
+  'invoices-admin',
+  {
+    metadata: {
+      namespace: ns.metadata.name,
+    },
+    rules: [
+      {
+        apiGroups: [''],
+        resources: [
+          'pods',
+          'pods/portforward',
+          'secrets',
+          'services',
+          'persistentvolumeclaims',
+          'configmaps',
+          'deployments',
+        ],
+        verbs: ['get', 'list', 'watch', 'create', 'update', 'delete'],
+      },
+      {
+        apiGroups: [''],
+        resources: ['pods/log', 'logs'],
+        verbs: ['get', 'list', 'watch', 'create'],
+      },
+      {
+        apiGroups: ['extensions', 'apps'],
+        resources: ['replicasets', 'deployments'],
+        verbs: ['get', 'list', 'watch', 'create', 'update', 'delete'],
+      },
+    ],
   },
-  rules: [
-    {
-      apiGroups: [''],
-      resources: [
-        'pods',
-        'pods/portforward',
-        'secrets',
-        'services',
-        'persistentvolumeclaims',
-        'configmaps',
-        'deployments',
-      ],
-      verbs: ['get', 'list', 'watch', 'create', 'update', 'delete'],
-    },
-    {
-      apiGroups: [''],
-      resources: ['pods/log', 'logs'],
-      verbs: ['get', 'list', 'watch', 'create'],
-    },
-    {
-      apiGroups: ['extensions', 'apps'],
-      resources: ['replicasets', 'deployments'],
-      verbs: ['get', 'list', 'watch', 'create', 'update', 'delete'],
-    },
-  ],
-})
+  { transformations: [addConventionalKubernetesResourceConfiguration] }
+)
 
-const rb: k8s.rbac.v1.RoleBinding = new k8s.rbac.v1.RoleBinding('invoices-full-access', {
-  metadata: {
-    namespace: ns.metadata.name,
-    annotations: commonAnnotations,
-  },
-  subjects: [
-    {
-      kind: 'Group',
-      name: 'invoices-developers', // TODO: Should point at a Group or User based on the assumed IAM Role.
+new k8s.rbac.v1.RoleBinding(
+  'invoices-full-access',
+  {
+    metadata: {
+      namespace: ns.metadata.name,
     },
-  ],
-  roleRef: {
-    kind: 'Role',
-    name: r.metadata.name,
-    apiGroup: 'rbac.authorization.k8s.io',
+    subjects: [
+      {
+        kind: 'Group',
+        name: 'invoices-developers', // TODO: Should point at a Group or User based on the assumed IAM Role.
+      },
+    ],
+    roleRef: {
+      kind: 'Role',
+      name: r.metadata.name,
+      apiGroup: 'rbac.authorization.k8s.io',
+    },
   },
-})
+  { transformations: [addConventionalKubernetesResourceConfiguration] }
+)
 
 // App management - to be controlled by developers
 const deployment = new k8s.apps.v1.Deployment(
@@ -79,18 +118,19 @@ const deployment = new k8s.apps.v1.Deployment(
     metadata: {
       name: 'invoice-app',
       namespace: ns.metadata.name,
-      labels: appLabels,
-      annotations: commonAnnotations,
     },
     spec: {
       selector: {
-        matchLabels: appLabels,
+        matchLabels: {
+          'pleo.io/app-name': appName,
+        },
       },
       template: {
         metadata: {
           namespace: ns.metadata.name,
-          labels: appLabels,
-          annotations: commonAnnotations,
+          labels: {
+            'pleo.io/app-name': appName,
+          },
         },
         spec: {
           containers: [
@@ -153,72 +193,78 @@ const deployment = new k8s.apps.v1.Deployment(
     customTimeouts: {
       create: '2m',
     },
+    transformations: [addConventionalKubernetesResourceConfiguration],
   }
 )
 
-new k8s.autoscaling.v2.HorizontalPodAutoscaler('invoice-app-cpu', {
-  metadata: {
-    name: 'invoice-app-cpu',
-    annotations: commonAnnotations,
-  },
-  spec: {
-    scaleTargetRef: {
-      apiVersion: deployment.apiVersion,
-      kind: deployment.kind,
-      name: deployment.metadata.name,
+new k8s.autoscaling.v2.HorizontalPodAutoscaler(
+  'invoice-app-cpu',
+  {
+    metadata: {
+      name: 'invoice-app-cpu',
     },
-    minReplicas: 1,
-    maxReplicas: 3,
-    metrics: [
-      {
-        type: 'Resource',
-        resource: {
-          name: 'cpu',
-          target: {
-            type: 'Utilization',
-            averageUtilization: 50,
+    spec: {
+      scaleTargetRef: {
+        apiVersion: deployment.apiVersion,
+        kind: deployment.kind,
+        name: deployment.metadata.name,
+      },
+      minReplicas: 1,
+      maxReplicas: 3,
+      metrics: [
+        {
+          type: 'Resource',
+          resource: {
+            name: 'cpu',
+            target: {
+              type: 'Utilization',
+              averageUtilization: 50,
+            },
           },
         },
-      },
-    ],
+      ],
+    },
   },
-})
+  { transformations: [addConventionalKubernetesResourceConfiguration] }
+)
 
 // This allows 'invoice-app` to discover `payment-provider` in another namespace.
 // It's not enought to make the connection work - `payment-provider` must explicitly
 // allow ingress access from `invoice-app` via NetworkPolicy
-new k8s.core.v1.Service('payment-provider', {
-  metadata: {
-    name: 'payment-provider',
-    namespace: ns.metadata.name,
-    labels: appLabels,
-    annotations: commonAnnotations,
+new k8s.core.v1.Service(
+  'payment-provider',
+  {
+    metadata: {
+      name: 'payment-provider',
+      namespace: ns.metadata.name,
+    },
+    spec: {
+      type: 'ExternalName',
+      externalName: `payment-provider.payments.svc.cluster.local`, // TODO: Consume namespace and app from Stack outputs
+      ports: [
+        {
+          name: 'http',
+          port: 80,
+          targetPort: 80,
+        },
+      ],
+    },
   },
-  spec: {
-    type: 'ExternalName',
-    externalName: `payment-provider.payments.svc.cluster.local`, // TODO: Consume namespace and app from Stack outputs
-    ports: [
-      {
-        name: 'http',
-        port: 80,
-        targetPort: 80,
-      },
-    ],
-  },
-})
+  { transformations: [addConventionalKubernetesResourceConfiguration] }
+)
 
 const service: k8s.core.v1.Service = new k8s.core.v1.Service(
   'invoice-app',
   {
     metadata: {
       name: 'invoice-app',
-      labels: appLabels,
-      annotations: commonAnnotations,
       namespace: ns.metadata.name,
     },
     spec: {
       type: 'ClusterIP',
-      selector: appLabels,
+      selector: {
+        'pleo.io/app-name': appName,
+      },
       ports: [
         {
           name: 'http',
@@ -230,38 +276,42 @@ const service: k8s.core.v1.Service = new k8s.core.v1.Service(
   },
   {
     dependsOn: deployment,
+    transformations: [addConventionalKubernetesResourceConfiguration],
   }
 )
 
 // This allows access to the service from outside the cluster
-new k8s.networking.v1.Ingress('invoice-app-ingress', {
-  metadata: {
-    name: 'invoice-app-ingress',
-    namespace: ns.metadata.name,
-    labels: appLabels,
-  },
-  spec: {
-    rules: [
-      {
-        http: {
-          paths: [
-            {
-              path: '/invoices',
-              pathType: 'Prefix',
-              backend: {
-                service: {
-                  name: service.metadata.name,
-                  port: {
-                    name: 'http',
+new k8s.networking.v1.Ingress(
+  'invoice-app-ingress',
+  {
+    metadata: {
+      name: 'invoice-app-ingress',
+      namespace: ns.metadata.name,
+    },
+    spec: {
+      rules: [
+        {
+          http: {
+            paths: [
+              {
+                path: '/invoices',
+                pathType: 'Prefix',
+                backend: {
+                  service: {
+                    name: service.metadata.name,
+                    port: {
+                      name: 'http',
+                    },
                   },
                 },
               },
-            },
-          ],
+            ],
+          },
         },
-      },
-    ],
+      ],
+    },
   },
-})
+  { transformations: [addConventionalKubernetesResourceConfiguration] }
+)
 
 export const name = deployment.metadata.name

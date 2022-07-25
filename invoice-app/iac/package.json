@@ -25,9 +25,9 @@
     "prettier-fix": "prettier --loglevel warn --write .",
     "lint-all": "npm run lint; npm run prettier",
     "fix-all": "npm run lint --fix; npm run prettier --fix",
-    "login-local": "pulumi login \"file://${PWD}\"",
-    "up-local": "npm run pulumi-login-local && pulumi up --yes",
-    "refresh-local": "npm run pulumi-login-local && pulumi up --yes",
-    "destroy-local": "npm run pulumi-login-local && pulumi up --yes"
+    "login-local": "export PULUMI_CONFIG_PASSPHRASE=password && pulumi login \"file://${PWD}\"",
+    "up-local": "npm run login-local && pulumi up --yes",
+    "refresh-local": "npm run login-local && pulumi up --yes",
+    "destroy-local": "npm run login-local && pulumi up --yes"
   }
 }

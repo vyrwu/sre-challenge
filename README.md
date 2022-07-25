@@ -56,7 +56,8 @@ Regarding 2.4, the following Kubernetes best practices were applied:
 * Added readiness and liveness probes to containers.
 * Passed configuration for `payment-provider` via environmental variables on the Kubernetes Deployment
 * Added resource requests and limits to deployments.
-* Add HorizontalPodAutoscalers to scale replicas based on simple CPU metric
+* Added HorizontalPodAutoscalers to scale replicas based on simple CPU metric
+* Added conventional labels to all Kubernetes resources created with Pulumi
 
 ## Part 3 - Solution
 - [ ] 3.1 Feel free to express your thoughts and share your experiences with real-world examples you worked with in the past. 

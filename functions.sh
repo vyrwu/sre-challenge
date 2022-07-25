@@ -85,7 +85,7 @@ function local_workspace_start() {
   minikube addons enable ingress
   cd iac-automation
   npm i
-  PULUMI_CONFIG_PASSPHRASE=password npm run start -- up local
+  export PULUMI_CONFIG_PASSPHRASE=password && npm run start -- up local
   if [ $? -ne 0 ]; then
     success "Done! You are now running Minikube with all the apps deployed."
     success "For local development, use Pulumi under 'iac' repos in the respective projects."

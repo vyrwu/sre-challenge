@@ -23,11 +23,11 @@
 
 *No ingress = no access from outside. Might seal shut with K8s RBAC.*
 
-- [ ] 2.4 Update existing `deployment.yaml` files to follow k8s best practices. Feel free to remove existing files, recreate them, and/or introduce different technologies. Follow best practices for any other resources you decide to create.
+- [x] 2.4 Update existing `deployment.yaml` files to follow k8s best practices. Feel free to remove existing files, recreate them, and/or introduce different technologies. Follow best practices for any other resources you decide to create.
 
 *No readiness/liveness probes - might need extra endpoints in apps. Need some tagging. Need to operationalise. Kubernetes RBAC to secure the namespaces? Namespaces for test/prod? Container security? Container versions? Persistent volumes? Img pull policy? Resource requests/limits? App config/env vars? Ports?*
 
-- [ ] 2.5 Provide a better way to pass the URL in `invoice-app/main.go` - it's hardcoded at the moment
+- [x] 2.5 Provide a better way to pass the URL in `invoice-app/main.go` - it's hardcoded at the moment
 
 *Pass config via env vars on the deployment.*
 
