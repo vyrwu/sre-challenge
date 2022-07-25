@@ -4,7 +4,14 @@ Code challenge hand-out during the recruitment process of Aleksander Nowak, for 
 
 ## Requirements
 
-macOS instance with `brew`.
+macOS machine with `brew` installed.
+
+### Recommended binaries
+
+- [Docker Desktop](https://docs.docker.com/desktop/install/mac-install/)
+- [Minikube](https://minikube.sigs.k8s.io/docs/start/)
+- [hyperkit](https://minikube.sigs.k8s.io/docs/drivers/hyperkit/)
+- [Pulumi](https://www.pulumi.com/docs/get-started/install/)
 
 ## Local Development
 
@@ -40,6 +47,28 @@ npm run up-local
 npm run destroy-local
 ```
 
+## Integration Testing
+Integration tests reside under `test/integration` project. They can be executed against the local environment with a provided script.
+```sh
+make test-integration-local
+```
+### Known Issue: **Get "http://192.168.64.15/invoices": context deadline exceeded (Client.Timeout exceeded while awaiting headers)**
+Occasionally, network exposed by the VM that runs Minikube will be unreachable from host, and will result in tests failing. Note that
+your IP shown in the error message might differ. If that happens, the following should help:
+- Recreating local setup from scratch with
+```sh
+make deploy-local
+make test-integration-local
+```
+- Creating a port-forward into the `invoice-app` pod and running tests manually
+```sh
+podName=$(kubectl get pod -n invoices --template '{{range .items}}{{.metadata.name}}{{"\n"}}{{end}}' | head -n1)
+kubectl port-forward -n invoices "${podName}" 8081:8081 & // Runs port-forward in the background. You can safely exit the shell (f.x. Ctrl+C)
+cd test/integration/invoices
+go test // Runs test with target API set to 'http://localhost:8081' (default)
+pkill kubectl // Rerminates the background port-forward
+```
+
 ## Setup - Solution
 - [x] 0.1 Fork this repository
 - [x] 0.2 Create a new branch for you to work with.
@@ -66,7 +95,7 @@ materials, which is a common practice for Go applications.
 - [x] 2.4 Update existing `deployment.yaml` files to follow k8s best practices. Feel free to remove existing files, recreate them, and/or introduce different technologies. Follow best practices for any other resources you decide to create.
 - [x] 2.5 Provide a better way to pass the URL in `invoice-app/main.go` - it's hardcoded at the moment
 - [x] 2.6 Complete `deploy.sh` in order to automate all the steps needed to have both apps running in a K8s cluster.
-- [ ] 2.7 Complete `test.sh` so we can validate your solution can successfully pay all the unpaid invoices and return a list of all the paid invoices.
+- [x] 2.7 Complete `test.sh` so we can validate your solution can successfully pay all the unpaid invoices and return a list of all the paid invoices.
 
 Regarding 2.1, I deployed both apps to Kubernetes using Pulumi IAC. I considered instaling local ArgoCD instance to do K8s GitOps, however,
 some other IAC framework would still be needed for provisioning other infrastructure (AWS/GPC), so I decided to go with Pulumi
@@ -84,8 +113,13 @@ Regarding 2.4, the following Kubernetes best practices were applied:
 * Added conventional labels to all Kubernetes resources created with Pulumi
 
 Regarding 2.6, all setups required to deploy a local development environment for the apps was automated using Bash scripts,
-and the Makefile was updated to expose options to do execute those scripts. All scripts reside under the `scripts/` directory.
-Documentation inside `README.md` serves as instructions on handling local development using the setup.
+and the Makefile was updated to expose options to do execute those scripts. All scripts now reside under the `scripts/`
+directory. Documentation inside `README.md` gives instructions on how to setup local development environment.
+
+Regarding 2.7, I created a minimal set of integration tests in Go under `test/integration/invoices`. Those tests verify that
+the Invoices API, exposed via Ingress, works as expected. Tests executing against local environment are run with
+`make test-integration-local`. Documentation inside `README.md` contains instructions on how to execute the integration test
+suite.
 
 ## Part 3 - Solution
 - [ ] 3.1 Feel free to express your thoughts and share your experiences with real-world examples you worked with in the past. 

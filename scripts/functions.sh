@@ -2,6 +2,7 @@
 
 base_dir="$(cd "$(dirname $0)" &>/dev/null && pwd)"
 directory_name=$(basename "${base_dir}")
+parent_dir=$(dirname "${base_dir}")
 
 # Color
 

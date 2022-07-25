@@ -31,11 +31,11 @@
 
 *Pass config via env vars on the deployment.*
 
-- [ ] 2.6 Complete `deploy.sh` in order to automate all the steps needed to have both apps running in a K8s cluster.
+- [x] 2.6 Complete `deploy.sh` in order to automate all the steps needed to have both apps running in a K8s cluster.
 
 *Replace YAMLs with IAC (Pulumi/TF). Consider CI/CD with Github Actions (or ArgoCD)?. Alternatively simple makefiles.*
 
-- [ ] 2.7 Complete `test.sh` so we can validate your solution can successfully pay all the unpaid invoices and return a list of all the paid invoices.
+- [x] 2.7 Complete `test.sh` so we can validate your solution can successfully pay all the unpaid invoices and return a list of all the paid invoices.
 
 *Probes + Some integration tests should be enough.*
 
@@ -59,5 +59,5 @@ Introduce multi-evironment setup. Setup compliance and security guardrails aroun
 - [x] Debug services
 - [x] Create setup scripts
 - [x] Implement the solution, adjust the apps
-- [ ] Write integration tests
+- [x] Write integration tests
 - [x] Ensure documentation
