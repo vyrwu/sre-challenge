@@ -1,6 +1,11 @@
 # sre-challenge
 
 Code challenge hand-out during the recruitment process of Aleksander Nowak, for the position of a Site Reliability Engineer/DevOps Engineer.
+Thank you for taking the time to review my submission. Should you have any questions, please feel free to reach out!
+
+Overall diagram of the solution:
+
+![solution](solution.png)
 
 ## Requirements
 
@@ -122,8 +127,8 @@ the Invoices API, exposed via Ingress, works as expected. Tests executing agains
 suite.
 
 ## Part 3 - Solution
-- [ ] 3.1 Feel free to express your thoughts and share your experiences with real-world examples you worked with in the past. 
-- [ ] 3.2 What would you do to improve this setup and make it "production ready"?
+- [X] 3.1 Feel free to express your thoughts and share your experiences with real-world examples you worked with in the past. 
+- [x] 3.2 What would you do to improve this setup and make it "production ready"?
 - [x] 3.3 There are 2 microservices that are maintained by 2 different teams. Each team should have access only to their service inside the cluster. How would you approach this?
 - [x] 3.4 How would you prevent other services running in the cluster to communicate to `payment-provider`?
 
@@ -135,3 +140,36 @@ Regarding 3.4, to prevent other applications running in the cluster to communica
 `invoice-app` to use it, this introduced a NetworkPolicy which blocks all ingress traffic to `payment-provider` from all
 pods except the ones belonging to the `invoice-app` deployment. This way, access to each individual application must be
 explicitly granted, and other applications can block all trafic by default, only allowing the expected traffic through.
+
+Regarding 3.1, I would like to prefice my thoughts saying that I do not believe this setup to be the only correct setup.
+I believe that this setup offers a high degree of control to autonomous teams. It also consolidates application configuration
+and infrastructure provisioning under a single tool - Pulumi. The setup does not introduce a lot of abstractions, but rather
+draws heavily from the idiomatic way of doing Pulumi, which can be easily learned from open-source examples. In contrast,
+in my previous company, we built a massive infrastructure platform with Pulumi. It was a sophisticated solution, likely highly
+effective on a higher levels scale, but resulted in a heavy operational burned and long provisioning times on our
+CI/CD pipelines. We created a certain bottleneck for software delivery, and gatekept innovation as anything infrastructure
+related must have been developed as part of the SRE platform first. I currently firmly believe that teams should be as
+autonomous as possible. However, expertise scales, so the SRE team should deliver easy-to-use solutions that utilize
+well-documented open-source/managed technologies that empower developers to deliver better software. SRE should be working
+on a higher level than developers, creating frames and guardrails in which developers operate when producing software -
+but at the end of the day, developers should own the entire solution (You-Built-It-You-Run-It). Embedded SRE model is perfect
+for auditting product team's software, advocating for SRE principles, sharing knowledge and solving more challenging operational
+issues. On the note of GitOps - this setup could be easily replaced with ArgoCD+CrossPlane. However, some IAC solution must still be in
+place anyway (for example, to provision the initial CI cluster with ArgoCD and the AWS account networking), plus the selection of
+Crossplane providers might still be not quite up to par with Terraform/Pulumi. A combination of ArgoCD for application configuration,
+and TF/Pulumi for infrastructure is also quite feasible and could be very powerful. Usually, I'd discuss the pros/cons with the team,
+and make a common decision on what kind of setup we're going for.
+ 
+Regarding 3.2, this setup is good enough for a Pulumi demo, but not that close to production-ready. At the very least, it needs:
+- CI/CD for IAC (ideally promotional pipelines)
+- multiple environments (at least staging and production)
+- proper databases (f.x. AWS DynamoDB for `invoice-app`, and make `payment-provider` async with AWS SQS)
+- telemetry and instrumentation (metrics/logs/traces)
+- cluster authentication (f.x. based on IAM Roles)
+- deployment tooling for devs (with better tagging strategy and canary/blue-green deploys)
+- better autoscaling configuration (based on historical metrics)
+- proper artifact storage (f.x. AWS ECR)
+- better sharing of common IAC code (f.x. NPM module)
+- security improvements (TLS for cross-service communication, etc.)
+- secret configuration storage (if needed)
+- many more (that's the fun part :-) )

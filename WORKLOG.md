@@ -40,8 +40,8 @@
 *Probes + Some integration tests should be enough.*
 
 #### Part 3
-- [ ] Feel free to express your thoughts and share your experiences with real-world examples you worked with in the past. 
-- [ ] What would you do to improve this setup and make it "production ready"?
+- [x] Feel free to express your thoughts and share your experiences with real-world examples you worked with in the past. 
+- [x] What would you do to improve this setup and make it "production ready"?
 
 Introduce multi-evironment setup. Setup compliance and security guardrails around AWS accounts. Deliver emepheral/shared dev environments for devs. Create CI/CD with sufficient quality gates (lint/unit/intergration/load/chaos/smoke tests). Sign and promote Docker image across pipeline steps. Optional QA testing manual approval. Auto-deploy to prod. Add telemetry - traces/logs/metrics/alerts. Add DynamoDB to invoice-app, and rewrite payment-provider to be async with SQS. Provision AWS resources with IAC (IAM role auth based on pod roles). 
 
